@@ -61,7 +61,7 @@ export default {
       this.isVerified = true;
 
       setTimeout(() => {
-        this.$router.push('/home');
+        this.$router.push('/home-Jp');
       }, 1000);
     },
   },

