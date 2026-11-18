@@ -105,8 +105,6 @@ export default {
               <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="m11 5l-7 7l7 7m-7-7h16" />
             </svg>
-
-
             Help Terms Privacy
           </a>
         </nav>

